@@ -1,0 +1,229 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 210 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 15%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 80% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 20% 97%;
+    --muted-foreground: 210 20% 45%;
+
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 20% 92%;
+    --input: 210 20% 92%;
+    --ring: 210 100% 50%;
+
+    --radius: 0.8rem;
+  }
+
+  .dark {
+    --background: 210 30% 10%;
+    --foreground: 210 20% 98%;
+
+    --card: 210 30% 12%;
+    --card-foreground: 210 20% 98%;
+
+    --popover: 210 30% 12%;
+    --popover-foreground: 210 20% 98%;
+
+    --primary: 210 100% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 80% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 30% 20%;
+    --muted-foreground: 210 20% 70%;
+
+    --accent: 270 80% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 210 30% 20%;
+    --input: 210 30% 20%;
+    --ring: 210 100% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-semibold tracking-tight;
+  }
+  
+  html {
+    @apply scroll-smooth;
+  }
+  
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Custom classes */
+@layer components {
+  /* Tooltip styles - No longer needed as we're using full text */
+  /* Keeping the class for potential future use */
+  .has-tooltip {
+    @apply relative;
+  }
+  
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-soft;
+  }
+  
+  .subtle-glass {
+    @apply bg-white/40 backdrop-blur-sm border border-white/10;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-elegant;
+  }
+  
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary;
+  }
+  
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .page-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  /* New utilities for enhanced career test design */
+  .bg-size-200 {
+    background-size: 200% 100%;
+  }
+  
+  .bg-pos-0 {
+    background-position: 0% 0%;
+  }
+  
+  .bg-pos-100 {
+    background-position: 100% 0%;
+  }
+  
+  .shadow-soft {
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.05);
+  }
+  
+  .shadow-elegant {
+    box-shadow: 0 10px 30px -3px rgba(0, 0, 0, 0.07);
+  }
+  
+  /* Custom slider thumb styling */
+  .slider-thumb {
+    @apply h-5 w-5 rounded-full border-2 border-white shadow-md transition-all duration-200;
+  }
+  
+  /* Corrected: Remove the problematic parent selector syntax */
+  .parent-has-slider-thumb > .slider-thumb {
+    @apply h-5 w-5 rounded-full border-2 border-white shadow-md transition-all duration-200;
+  }
+  
+  /* CV Creator enhanced styles */
+  .cv-section-card {
+    @apply transition-all duration-300 hover:shadow-xl hover:translate-y-[-3px];
+  }
+  
+  .cv-input-field {
+    @apply border-blue-200 focus-visible:ring-blue-400 focus-visible:ring-opacity-50;
+  }
+  
+  .cv-section-header {
+    @apply bg-gradient-to-r from-blue-50 to-indigo-50 rounded-t-lg border-b border-blue-100;
+  }
+  
+  .cv-form-bg {
+    @apply bg-gradient-to-b from-blue-50/50 to-indigo-50/50;
+  }
+  
+  .pattern-bg {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .floating-effect {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  
+  .pulse-effect {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  
+  .gradient-btn {
+    @apply bg-gradient-to-r from-primary to-indigo-600 hover:from-primary/90 hover:to-indigo-500 
+           transition-all duration-300 text-white font-medium px-5 py-2.5 rounded-lg
+           shadow-md hover:shadow-lg focus:ring-4 focus:ring-primary/25;
+  }
+  
+  .gradient-border {
+    position: relative;
+    border-radius: 0.8rem;
+  }
+  
+  .gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 0.8rem;
+    padding: 2px;
+    background: linear-gradient(to right, #3b82f6, #6366f1);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
