@@ -40,7 +40,6 @@ import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
 import { useEffect } from "react";
 import { supabase } from "./integrations/supabase/client";
-import { useLocation, Navigate } from "react-router-dom";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -52,7 +51,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  // Keep the session check but don't show any UI based on it
+  // Ensure session persistence is properly configured
   useEffect(() => {
     const checkSession = async () => {
       const { data } = await supabase.auth.getSession();
@@ -73,9 +72,72 @@ const App = () => {
             <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
-              {/* Redirect all other routes to 404 */}
-              <Route path="*" element={<Navigate to="/404" replace />} />
-              <Route path="/404" element={<NotFound />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/dashboard/*" element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/login" element={<UserLogin />} />
+              <Route path="/signup" element={<UserSignup />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
+              <Route path="/profile" element={
+                <ProtectedRoute>
+                  <UserProfile />
+                </ProtectedRoute>
+              } />
+              <Route path="/creator/dashboard/*" element={
+                <ProtectedRoute>
+                  <CreatorDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/cv-creator" element={
+                <ProtectedRoute>
+                  <CVCreator />
+                </ProtectedRoute>
+              } />
+              <Route path="/career-test" element={
+                <ProtectedRoute>
+                  <CareerTest />
+                </ProtectedRoute>
+              } />
+              <Route path="/find-work" element={
+                <ProtectedRoute>
+                  <FindWork />
+                </ProtectedRoute>
+              } />
+              <Route path="/find-talent" element={
+                <ProtectedRoute>
+                  <FindTalent />
+                </ProtectedRoute>
+              } />
+              <Route path="/post-project" element={
+                <ProtectedRoute>
+                  <PostProject />
+                </ProtectedRoute>
+              } />
+              
+              {/* Public Pages */}
+              <Route path="/help" element={<Help />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/community" element={<Community />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/enterprise" element={<Enterprise />} />
+              <Route path="/success-stories" element={<SuccessStories />} />
+              <Route path="/leadership" element={<Leadership />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/press" element={<Press />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/agencies" element={<Agencies />} />
+              <Route path="/startups" element={<Startups />} />
+              <Route path="/discover" element={<Discover />} />
+              <Route path="/categories" element={<Categories />} />
+              <Route path="/privacy" element={<Privacy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/cookies" element={<Cookies />} />
+              
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </TooltipProvider>
         </AuthProvider>
