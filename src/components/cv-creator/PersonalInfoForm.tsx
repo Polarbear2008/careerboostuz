@@ -14,6 +14,52 @@ interface PersonalInfoFormProps {
 const PersonalInfoForm = ({ control }: PersonalInfoFormProps) => {
   return (
     <div className="space-y-6 pt-6">
+      {/* Profile Image Upload */}
+      <FormField
+        control={control}
+        name="personalInfo.imageUrl"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-slate-700 flex items-center">
+              <User className="w-3.5 h-3.5 mr-1.5 text-blue-500" /> Profile Image
+            </FormLabel>
+            <FormControl>
+              <div className="flex items-center gap-4">
+                {field.value ? (
+                  <img
+                    src={field.value}
+                    alt="Profile Preview"
+                    className="w-16 h-16 rounded-full object-cover border border-gray-200"
+                  />
+                ) : (
+                  <div className="w-16 h-16 rounded-full bg-gray-100 flex items-center justify-center text-gray-400 border border-gray-200">
+                    <User className="w-8 h-8" />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  className="block text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+                  onChange={async (e) => {
+                    if (e.target.files && e.target.files[0]) {
+                      const file = e.target.files[0];
+                      try {
+                        const { uploadProfileImage } = await import("@/lib/uploadProfileImage");
+                        const url = await uploadProfileImage(file);
+                        if (url) field.onChange(url);
+                      } catch (err) {
+                        console.error("Image upload error:", err);
+                        alert("Failed to upload image");
+                      }
+                    }
+                  }}
+                />
+              </div>
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
           control={control}

@@ -11,6 +11,7 @@ export const cvFormSchema = z.object({
     location: z.string().optional(),
     website: z.string().url("Must be a valid URL").optional().or(z.literal("")),
     summary: z.string().min(20, "Summary should be at least 20 characters"),
+    imageUrl: z.string().url().optional().or(z.literal("")),
   }),
   experience: z.array(
     z.object({

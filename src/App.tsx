@@ -25,6 +25,7 @@ import Help from "./pages/Help";
 import About from "./pages/About";
 import Community from "./pages/Community";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
 import Enterprise from "./pages/Enterprise";
 import SuccessStories from "./pages/SuccessStories";
 import Leadership from "./pages/Leadership";
@@ -38,6 +39,8 @@ import Categories from "./pages/Categories";
 import Privacy from "./pages/Privacy";
 import Terms from "./pages/Terms";
 import Cookies from "./pages/Cookies";
+import FreelancerProfile from "./pages/FreelancerProfile";
+import { Badge } from "./components/ui/badge";
 import { useEffect } from "react";
 import { supabase } from "./integrations/supabase/client";
 
@@ -91,37 +94,18 @@ const App = () => {
                   <CreatorDashboard />
                 </ProtectedRoute>
               } />
-              <Route path="/cv-creator" element={
-                <ProtectedRoute>
-                  <CVCreator />
-                </ProtectedRoute>
-              } />
-              <Route path="/career-test" element={
-                <ProtectedRoute>
-                  <CareerTest />
-                </ProtectedRoute>
-              } />
-              <Route path="/find-work" element={
-                <ProtectedRoute>
-                  <FindWork />
-                </ProtectedRoute>
-              } />
-              <Route path="/find-talent" element={
-                <ProtectedRoute>
-                  <FindTalent />
-                </ProtectedRoute>
-              } />
-              <Route path="/post-project" element={
-                <ProtectedRoute>
-                  <PostProject />
-                </ProtectedRoute>
-              } />
+              <Route path="/cv-creator" element={<CVCreator />} />
+              <Route path="/career-test" element={<CareerTest />} />
+              <Route path="/find-work" element={<FindWork />} />
+              <Route path="/find-talent" element={<FindTalent />} />
+              <Route path="/post-project" element={<PostProject />} />
               
               {/* Public Pages */}
               <Route path="/help" element={<Help />} />
               <Route path="/about" element={<About />} />
               <Route path="/community" element={<Community />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogPost />} />
               <Route path="/enterprise" element={<Enterprise />} />
               <Route path="/success-stories" element={<SuccessStories />} />
               <Route path="/leadership" element={<Leadership />} />
@@ -135,9 +119,9 @@ const App = () => {
               <Route path="/privacy" element={<Privacy />} />
               <Route path="/terms" element={<Terms />} />
               <Route path="/cookies" element={<Cookies />} />
-              
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
+              <Route path="/freelancers/:id" element={<FreelancerProfile />} />
+              <Route path="/404" element={<NotFound />} />
+              <Route path="*" element={<Navigate to="/404" replace />} />
             </Routes>
           </TooltipProvider>
         </AuthProvider>

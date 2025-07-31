@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -94,16 +95,20 @@ export const FreelancerCard = ({ freelancer }: FreelancerCardProps) => {
           </CardContent>
           
           <CardFooter className="border-t py-3 flex justify-between">
-            <Button 
-              variant="outline" 
-              size="sm" 
-              onClick={() => setIsProfileOpen(true)}
-            >
-              View Profile
-            </Button>
-            <Button size="sm" className="gap-1.5">
-              <MessageSquare className="h-4 w-4" /> Contact
-            </Button>
+            <div className="flex items-center gap-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                asChild
+              >
+                <Link to={`/freelancers/${freelancer.id}`}>
+                  View Profile
+                </Link>
+              </Button>
+              <Button size="sm" className="gap-1.5">
+                <MessageSquare className="h-4 w-4" /> Contact
+              </Button>
+            </div>
           </CardFooter>
         </Card>
       </motion.div>

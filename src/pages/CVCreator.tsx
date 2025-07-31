@@ -50,10 +50,50 @@ const itemVariants = {
   }
 };
 
+// CV template options for selection
+const templateOptions = [
+  {
+    key: "classic",
+    name: "Classic",
+    description: "Traditional layout, easy to read",
+    previewClass: "bg-gradient-to-br from-gray-50 to-gray-200 border-gray-200",
+    premium: false,
+  },
+  {
+    key: "modern",
+    name: "Modern",
+    description: "Bold headings, sidebar highlights",
+    previewClass: "bg-gradient-to-br from-blue-50 to-blue-200 border-blue-200",
+    premium: false,
+  },
+  {
+    key: "minimalist-premium",
+    name: "Minimalist Premium",
+    description: "Sleek, gold/blue accents, premium look",
+    previewClass: "bg-gradient-to-br from-yellow-50 to-blue-50 border-yellow-300",
+    premium: true,
+  },
+  {
+    key: "elegant-minimalist",
+    name: "Elegant Minimalist",
+    description: "Minimal, spacious, refined for top jobs",
+    previewClass: "bg-gradient-to-br from-white to-gray-100 border-gray-100",
+    premium: false,
+  },
+  {
+    key: "creative-designer",
+    name: "Creative Designer",
+    description: "Bold sidebar, creative header, timeline layout",
+    previewClass: "bg-gradient-to-br from-indigo-100 to-purple-100 border-indigo-200",
+    premium: false,
+  },
+];
+
 const CVCreator = () => {
   const [activeTab, setActiveTab] = useState("edit");
   const [skills, setSkills] = useState<string[]>([]);
   const [currentSkill, setCurrentSkill] = useState("");
+  const [selectedTemplate, setSelectedTemplate] = useState<string>("classic");
 
   // Initialize form with default values
   const form = useForm<CVFormValues>({
@@ -120,6 +160,30 @@ const CVCreator = () => {
       </div>
 
       <div className="container px-4 mx-auto">
+        {/* Template Selector */}
+        <div className="flex flex-col items-center mb-8">
+          <h2 className="text-lg font-semibold mb-2 text-slate-700">Choose Your CV Template</h2>
+          <div className="flex flex-wrap gap-4 justify-center">
+            {templateOptions.map((tpl) => (
+              <button
+                key={tpl.key}
+                type="button"
+                className={`relative p-3 rounded-lg shadow-md transition-all duration-200 cursor-pointer min-w-[120px] max-w-[160px] h-[90px] flex flex-col items-center justify-center border-2 outline-none focus:ring-2 focus:ring-primary/50 ${tpl.previewClass} ${selectedTemplate === tpl.key ? 'ring-2 ring-primary border-primary' : 'hover:border-blue-400 hover:ring-1'}`}
+                onClick={() => setSelectedTemplate(tpl.key)}
+                aria-label={`Select ${tpl.name} template`}
+              >
+                <span className="font-bold text-base mb-1">{tpl.name}</span>
+                <span className="text-xs text-slate-500 mb-1 text-center">{tpl.description}</span>
+                {tpl.premium && (
+                  <span className="absolute top-2 right-2 bg-yellow-400 text-xs text-white font-semibold px-2 py-0.5 rounded shadow-md">Premium</span>
+                )}
+                {selectedTemplate === tpl.key && (
+                  <span className="absolute bottom-2 right-2 bg-primary text-white text-xs px-2 py-0.5 rounded-full">Selected</span>
+                )}
+              </button>
+            ))}
+          </div>
+        </div>
         <motion.div 
           className="text-center mb-6"
           initial={{ opacity: 0, y: -20 }}
@@ -246,7 +310,7 @@ const CVCreator = () => {
               transition={{ duration: 0.4 }}
               className="w-full"
             >
-              <CVPreview formValues={formValues} skills={skills} />
+              <CVPreview formValues={formValues} skills={skills} selectedTemplate={selectedTemplate} />
               
               <div className="flex justify-center mt-8">
                 <Button 

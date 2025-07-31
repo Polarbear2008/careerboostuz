@@ -9,14 +9,48 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "::",
     port: 8080,
+    // Handle SPA fallback for client-side routing
+    historyApiFallback: true,
   },
   plugins: [
-    react(),
+    react({
+      // Enable React 18 automatic JSX runtime
+      jsxImportSource: 'react',
+    }),
     mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
+      // Ensure react-markdown and related packages are properly resolved
+
     },
+  },
+  // Base public path when served in production
+  base: '/',
+  // Configure the build output for SPA
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split react-markdown and related dependencies into a separate chunk
+          'react-markdown': ['react-markdown', 'remark-gfm', 'rehype-raw'],
+        },
+      },
+    },
+    // Enable source maps in development
+    sourcemap: mode === 'development',
+    // Minify the output in production
+    minify: mode === 'production' ? 'esbuild' : false,
+  },
+  // Optimize dependencies
+  optimizeDeps: {
+    include: [
+      'react',
+      'react-dom',
+      'react-markdown',
+      'remark-gfm',
+      'rehype-raw',
+    ],
   },
 }));

@@ -3,7 +3,7 @@ import NavBar from "@/components/layout/NavBar";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { MessageCircle, Users, Calendar, BookOpen, Award, Heart } from "lucide-react";
+import { MessageCircle, Users, Calendar, BookOpen, Award, Heart, MessageSquareText, ArrowRight } from "lucide-react";
 
 const Community = () => {
   const events = [
@@ -64,9 +64,20 @@ const Community = () => {
             <div className="max-w-3xl mx-auto text-center">
               <h1 className="text-4xl md:text-5xl font-bold mb-6">Join Our Community</h1>
               <p className="text-lg text-muted-foreground mb-8">
-                Connect, learn, and grow with thousands of freelancers and businesses worldwide
+                Connect with fellow freelancers, share knowledge, and grow together in our Telegram community
               </p>
-              <Button size="lg" className="px-8">Join Community</Button>
+              <a 
+                href="https://t.me/careerboost_uz" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block"
+              >
+                <Button size="lg" className="group">
+                  <MessageSquareText className="mr-2 h-5 w-5" />
+                  Join Our Telegram
+                  <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Button>
+              </a>
             </div>
           </div>
         </section>
@@ -110,14 +121,46 @@ const Community = () => {
           </div>
         </section>
 
-        {/* Upcoming Events */}
-        <section className="py-16 bg-muted">
+        {/* Telegram CTA Section */}
+        <section className="py-16 bg-primary/5">
+          <div className="page-container">
+            <div className="bg-gradient-to-r from-primary to-primary/90 rounded-2xl p-8 md:p-12 text-white">
+              <div className="max-w-4xl mx-auto text-center">
+                <MessageSquareText className="h-12 w-12 mx-auto mb-6 text-white/90" />
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Join Our Telegram Community</h2>
+                <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+                  Connect with other professionals, share opportunities, and stay updated with the latest news and events in our exclusive Telegram group.
+                </p>
+                <a 
+                  href="https://t.me/careerboost_uz" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-block"
+                >
+                  <Button 
+                    size="lg" 
+                    variant="secondary" 
+                    className="group bg-white text-primary hover:bg-white/90 font-medium"
+                  >
+                    <MessageSquareText className="mr-2 h-5 w-5" />
+                    Join @careerboost_uz
+                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Features Section */}
+        <section className="py-16">
           <div className="page-container">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-bold mb-4">Upcoming Events</h2>
-              <p className="text-muted-foreground">Don't miss these exciting community events</p>
+              <h2 className="text-3xl font-bold mb-4">Why Join Our Community?</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">
+                Be part of a growing network of talented professionals and access exclusive resources on Telegram
+              </p>
             </div>
-
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {events.map((event, index) => (
                 <Card key={index}>

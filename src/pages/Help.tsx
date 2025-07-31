@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { MessageCircle, Mail, Phone, HelpCircle } from "lucide-react";
+import { MessageCircle, Mail, Phone, HelpCircle, MessageSquareText } from "lucide-react";
 
 const Help = () => {
   const faqs = [
@@ -48,36 +48,51 @@ const Help = () => {
         <section className="py-16">
           <div className="page-container">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
-                  <MessageCircle className="h-12 w-12 text-primary mx-auto mb-4" />
+                  <MessageSquareText className="h-12 w-12 text-primary mx-auto mb-4" />
                   <CardTitle>Live Chat</CardTitle>
-                  <CardDescription>Chat with our support team in real-time</CardDescription>
+                  <CardDescription>Chat with our support team on Telegram</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button className="w-full">Start Chat</Button>
+                  <a href="https://t.me/samandar_vibe" target="_blank" rel="noopener noreferrer" className="w-full">
+                    <Button className="w-full">
+                      <MessageCircle className="mr-2 h-4 w-4" />
+                      Chat on Telegram
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
 
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <Mail className="h-12 w-12 text-primary mx-auto mb-4" />
                   <CardTitle>Email Support</CardTitle>
                   <CardDescription>Get help via email within 24 hours</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full">Send Email</Button>
+                  <a href="mailto:numonovsamandarferps@gmail.com" className="w-full">
+                    <Button variant="outline" className="w-full">
+                      <Mail className="mr-2 h-4 w-4" />
+                      numonovsamandarferps@gmail.com
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
 
-              <Card className="text-center">
+              <Card className="text-center hover:shadow-lg transition-shadow">
                 <CardHeader>
                   <Phone className="h-12 w-12 text-primary mx-auto mb-4" />
                   <CardTitle>Phone Support</CardTitle>
                   <CardDescription>Call us for immediate assistance</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="outline" className="w-full">+1 (555) 123-4567</Button>
+                  <a href="tel:+998916611945" className="w-full">
+                    <Button variant="outline" className="w-full">
+                      <Phone className="mr-2 h-4 w-4" />
+                      +998 91 661 19 45
+                    </Button>
+                  </a>
                 </CardContent>
               </Card>
             </div>
