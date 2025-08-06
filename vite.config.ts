@@ -25,24 +25,31 @@ export default defineConfig(({ mode }) => ({
     },
   },
   // Base public path when served in production
-  base: process.env.NODE_ENV === 'production' ? '/careerboost/' : '/',
+  base: '/',
+  // Handle static assets
+  publicDir: 'public',
   // Configure the build output for SPA
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: true,
+    emptyOutDir: true,
     rollupOptions: {
+      input: {
+        main: 'index.html'
+      },
       output: {
         manualChunks: {
           // Split react-markdown and related dependencies into a separate chunk
           'react-markdown': ['react-markdown', 'remark-gfm', 'rehype-raw'],
+          vendor: ['react', 'react-dom'],
         },
       },
     },
-    // Enable source maps in development
-    sourcemap: mode === 'development',
-    // Minify the output in production
-    minify: mode === 'production' ? 'esbuild' : false,
+  },
+  // For Vercel deployment
+  define: {
+    'process.env': {}
   },
   // Optimize dependencies
   optimizeDeps: {
