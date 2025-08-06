@@ -22,14 +22,15 @@ export default defineConfig(({ mode }) => ({
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
-      // Ensure react-markdown and related packages are properly resolved
-
     },
   },
   // Base public path when served in production
-  base: '/',
+  base: process.env.NODE_ENV === 'production' ? '/careerboost/' : '/',
   // Configure the build output for SPA
   build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+    sourcemap: true,
     rollupOptions: {
       output: {
         manualChunks: {
